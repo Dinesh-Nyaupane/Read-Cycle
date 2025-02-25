@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book Form</title>
+    <!-- Include SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 60vw;
+            margin: auto;
+            padding: 20px;
+        }
+        .input-column {
+            width: 48%;
+            margin-bottom: 15px;
+        }
+        .input-column input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 2px;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        .button {
+            background-color: navy;
+            border-radius: 20px;
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: auto;
+            bottom: 0;
+            margin-top: 125px;
+            margin-left: -22px;
+        }
+        h1 {
+            width: 100%;
+            text-align: center;
+            font-size: 30px;
+            text-decoration: underline;
+            margin-bottom: 10px;
+        }
+        textarea {
+            border: 1px solid rgb(215, 213, 213);
+            width: 784px;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        input {
+            font: 25px;
+        }
+        .swal2-popup {
+            font-size: 1.5rem;
+            font-family: cursive;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+            {{!-- background: transparent; --}}
+}
+    </style>
+</head>
+<body>
+    <form id="updateForm" action="/update/{{book.book_id}}" method="POST">
+        <h1>Update Book</h1>
+
+        <div class="input-column">
+            <input type="text" id="title" name="title" placeholder="Enter title of your book..." value="{{book.title}}">
+        </div>
+
+        <div class="input-column">
+            <input type="text" id="author" name="author" placeholder="Enter author name..." value="{{book.author}}">
+        </div>
+
+        <div class="input-column">
+            <input type="text" id="ISBN" name="ISBN" required pattern="\d{13}" title="Must be a 13-digit number" placeholder="Enter valid ISBN number..." value="{{book.ISBN}}">
+        </div>
+
+        <div class="input-column">
+            <input type="text" id="genre" name="genre" placeholder="Enter the genre of book" value="{{book.genre}}">
+        </div>
+
+        <div class="input-column">
+            <input type="number" id="price" name="price" placeholder="Enter price of book..." value="{{book.price}}">
+        </div>
+
+        <div class="input-column">
+            <input type="text" id="image_url" name="image_url" placeholder="Enter image url..." value="{{book.image_url}}">
+        </div>
+
+        <div class="input-column">
+            <textarea id="synopsis" name="synopsis" rows="4" placeholder="Enter short description of book...">{{book.synopsis}}</textarea>
+        </div>
+          
+        <button type="submit" onclick="alertLoader()" class="button">Update</button>
+    </form>
+
+    <!-- Include SweetAlert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function alertLoader(){
+            const Toast = Swal.mixin({
+  toast: true,
+  position: "top",
+  showConfirmButton: false,
+  timer: 1500,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  icon: "success",
+  title: "Book updated in successfully"
+});
+        }
+    </script>
+</body>
+</html>

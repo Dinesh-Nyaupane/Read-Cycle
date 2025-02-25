@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Display</title>
+  <!-- Include SweetAlert CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+    
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 3px;
+    }
+    
+    .card {
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      {{!-- gap: 20px
+      ; --}}
+    }
+    
+    .card img {
+      width: 100%;
+      height: 300px;
+      object-fit: contain;
+      margin: 0;
+    }
+    
+    .card-body {
+      padding: 10px;
+    }
+    
+    .card-title {
+      margin-top: 0;
+      {{!-- margin-bottom: 5px; --}}
+      font-size: 25px;
+      text-align: center;
+    }
+    
+    .card-price {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #920101;
+      text-align: center;    }
+    
+    .button-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      {{!-- width: 100px; --}}
+    }
+    
+    .btn-update,
+    .btn-delete {
+      padding: 20px;      background-color: navy;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 38px;
+      font-size: 17px;
+    }
+    
+    .btn-update:hover {
+      background-color: #23a608;
+    }
+    
+    .btn-delete:hover {
+      background-color: #e20017;
+    }
+
+    .btn-delete:focus {
+      outline: none;
+    }
+    
+    .btn-delete:active {
+      transform: translateY(1px);
+    }
+    
+    .no-books {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: auto;
+      {{!-- margin-bottom: 50%; --}}
+      font-size: 40px;
+      color: #000000;
+      height: 70vh;
+      
+    }
+    #by{
+      font-size: 15px;
+      color: rgb(31, 29, 29);
+    }
+
+  </style>
+</head>
+<body>
+
+{{#if books.length}}
+  <div class="card-container">
+    {{#each books}}
+      <div class="card">
+          <img src="{{image_url}}" alt="{{title}} Image">
+          <div class="card-body">
+              <h1 class="card-title">{{title}} <br><span id="by">By {{author}}</span></h1>
+              <h2 class="card-price">Rs. {{price}}/-</h2>
+              <div class="button-container">
+                <a href="/update/{{book_id}}" class="btn-update">Update</a>
+              <button class="btn-delete" onclick="confirmDelete('{{book_id}}')">Delete</button>
+              </div>
+          </div>
+      </div>
+    {{/each}}
+  </div>
+{{else}}
+  <p class="no-books">No books added yet.</p>
+{{/if}}
+
+<!-- Include SweetAlert JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  function confirmDelete(bookId) {
+    Swal.fire({
+      title: 'Do you want to delete this book?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      confirmButtonColor: 'red',
+      cancelButtonText: 'No',
+      cancelButtonColor: 'navy',
+      cancelButtonWidth: '50px',
+      focusCancel: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // If user confirms, directly delete the book
+        deleteBook(bookId);
+      }
+    });
+  }
+
+  function deleteBook(bookId) {
+    fetch(`/delete/${bookId}`, {
+      method: 'POST',
+    })
+    .then(response => {
+      if (response.ok) {
+        // Book deleted successfully, show success message
+        Swal.fire({
+          icon: 'success',
+          title: 'Book deleted successfully',
+          showConfirmButton: false,
+          timer: 1500
+        }).then(() => {
+          // Reload the page after book deletion
+          window.location.reload();
+        });
+      } else {
+        // Error occurred during book deletion
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed to delete book',
+          text: 'An error occurred while deleting the book. Please try again later.',
+          confirmButtonText: 'OK'
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Error deleting book:', error);
+      // Error occurred during book deletion
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed to delete book',
+        text: 'An error occurred while deleting the book. Please try again later.',
+        confirmButtonText: 'OK'
+      });
+    });
+  }
+</script>
+
+
+</body>
+</html>

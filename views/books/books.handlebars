@@ -1,0 +1,24 @@
+<!-- books/books.handlebars -->
+
+<body>
+   
+<section class="featured" id="featured" style="padding: 10px;">
+    <div class="swiper featured-slider">
+        {{#each books}}
+            <div class="box" style="margin-top: 0px;">
+                <div class="icons">
+                    {{!-- <a href="" class="fa-solid fa-cart-shopping"></a> --}}
+                    <a href="/bookdescription/{{book_id}}" class="fas fa-eye"></a>
+                </div>
+                <div class="image">
+                    <a href="/bookdescription/{{book_id}}"> <img src="{{image_url}}" alt="{{title}}"> </a>
+                </div>
+                <div class="content">
+                    <h3>{{title}}</h3>
+                    <div class="price" style="color: red; font-weight:bolder">Rs. {{price}}/-</div>
+                    <a href="/bookdescription/{{book_id}}" class="btn">Buy Now</a>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</section>

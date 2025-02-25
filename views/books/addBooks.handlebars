@@ -1,0 +1,98 @@
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 60vw;
+            margin: auto;
+            padding: 20px;
+            {{!-- margin-top: 20px; --}}
+        }
+        .input-column {
+            width: 48%;
+            margin-bottom: 15px;
+        }
+        .input-column input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 2px;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        .button {
+            background-color: navy;
+            border-radius: 20px;
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: auto;
+            bottom: 0;
+            margin-top: 120px;
+            margin-left: -22px;
+        }
+        .button:hover{
+            background-color: red;
+        }
+        h1 {
+            width: 100%;
+            text-align: center;
+            font-size: 30px;
+            text-decoration: underline;
+            margin-bottom: 10px;
+        }
+        textarea{
+          border: 1px solid rgb(215, 213, 213);
+          width: 784px;
+          border-radius: 5px;
+          padding: 10px;
+        }
+        input{
+          font: 25px;
+          
+        }
+    </style>
+</head>
+<body>
+    <form action="/addBooks" method="POST">
+        <h1>Add Books</h1>
+
+        <div class="input-column">
+            <input type="text" id="title" name="title" placeholder="Enter title of your book...">
+        </div>
+
+        <div class="input-column">
+            <input type="text" id="author" name="author" placeholder="Enter author name...">
+        </div>
+
+        <div class="input-column">
+            <input type="text" id="ISBN" name="ISBN" required pattern="\d{13}" title="Must be a 13-digit number" placeholder="Enter valid ISBN number...">
+        </div>
+
+        <div class="input-column">
+            <input type="text" id="genre" name="genre" placeholder="Enter the genre of book">
+        </div>
+
+        <div class="input-column">
+            <input type="number" id="price" name="price" placeholder="Enter price of book...">
+        </div>
+
+        <div class="input-column">
+            <input type="text" id="image_url" name="image_url" placeholder="Enter image url...">
+        </div>
+
+        <div class="input-column">
+            <textarea id="synopsis" name="synopsis" rows="4" placeholder="Enter short description of book..."></textarea>
+        </div>
+
+        <button type="submit" class="button">Add</button>
+    </form>
+

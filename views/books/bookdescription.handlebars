@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Description</title>
+    <style>
+        .book-container {
+            height: auto;
+            margin: 0;
+            padding: 10px;
+        }
+        p {
+            text-align: justify;
+            font-size: 17px;
+        }
+        .book-image {
+            height: 450px;
+            width: 420px;
+            object-fit: cover;        
+            }
+        .book-details {
+            gap: 5px;
+        }
+        .buttons {
+            display: flex;
+            align-items: auto;
+            justify-content: center;
+            /* margin: 10px; */
+        }
+        #buy {
+            margin: auto;
+            margin-top: 12px;
+        }
+        .seller {
+            font-size: 15px;
+            color: green;
+        }
+        .price {
+            color: red;
+            /* background-color: red; */
+        }
+    </style>
+</head>
+<body>
+
+<div class="book-container">
+    <div class="book-image">
+        <img src="{{book.image_url}}" alt="{{book.title}}">
+    </div>
+    <div class="book-details">
+        <h1>{{book.title}}</h1>
+        <h2>Book by {{book.author}}</h2>
+        <p>{{book.synopsis}}</p>
+        <div class="price">Price: Rs.{{book.price}}/-</div>
+        <div class="seller">
+            <span style="text-decoration: underline;font-size: 18px">Seller Details:</span> <br> 
+            Name: {{book.sellerName}} <br>
+            Phone: {{book.sellerPhone}} <br>
+            Address: {{book.sellerAddress}}
+        </div>
+        <div class="btn-grp">
+            <a href="{{#if isLoggedIn}}https://web.whatsapp.com/send?phone={{book.sellerPhone}}{{else}}/login{{/if}}" class="btn">
+                Chat with Seller <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="{{#if isLoggedIn}}{{else}}/login{{/if}}" class="btn">Ask for exchange</a><br>
+            <a href="{{#if isLoggedIn}}{{else}}/login{{/if}}" class="btn" id="buy">Buy Now</a> 
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Signup Form</title>
+    <!-- Include SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 60vw;
+            margin: auto;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .input-container {
+            width: 48%;
+            margin-bottom: 15px;
+        }
+        .input-container:nth-child(odd) {
+            margin-right: 4%;
+        }
+        .input-container input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 2px;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        .logo2 {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            align-self: flex-start;
+            margin: auto;
+        }
+        .button {
+            background-color: navy;
+            border-radius: 20px;
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: auto;
+        }
+        h1 {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 30px;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <form action="/signup" method="post">
+        <img src="https://ideogram.ai/api/images/direct/Oe0HICKVTYq3M8gKjTaJdA.png" alt="Logo" class="logo2">
+        <h1>Sign Up</h1>
+
+        <div class="input-container">
+            <input type="text" id="name" name="name" placeholder="Enter your full name...">
+            <div class="error-message">{{#if errors.name}}{{errors.name}}{{/if}}</div>
+        </div>
+
+        <div class="input-container">
+            <input type="text" id="address" name="address" placeholder="Enter your address...">
+            <div class="error-message">{{#if errors.address}}{{errors.address}}{{/if}}</div>
+        </div>
+
+        <div class="input-container">
+            <input type="email" id="email" name="email" placeholder="Enter your email...">
+            <div class="error-message">{{#if errors.email}}{{errors.email}}{{/if}}</div>
+        </div>
+
+        <div class="input-container">
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number...">
+            <div class="error-message">{{#if errors.phone}}{{errors.phone}}{{/if}}</div>
+        </div>
+
+        <div class="input-container">
+            <input type="password" id="password" name="password" placeholder="Enter a password...">
+            <div class="error-message">{{#if errors.password}}{{errors.password}}{{/if}}</div>
+        </div>
+
+        <div class="input-container">
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password...">
+            <div class="error-message">{{#if errors.confirmPassword}}{{errors.confirmPassword}}{{/if}}</div>
+        </div>
+
+        <button type="submit" class="button">Sign Up</button>
+    </form>
+    <script>
+        // Timeout function to remove error messages after 2 seconds
+        document.querySelectorAll('.error-message').forEach(errorMessage => {
+            setTimeout(() => {
+                errorMessage.textContent = '';
+            }, 2000);
+        });
+        window.onload = function () {
+            const message = "{{message}}";
+            const icon="{{icon}}"
+            if (message) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                         toast.onmouseenter = Swal.stopTimer;
+                         toast.onmouseleave = Swal.resumeTimer;
+                         }
+                });
+            Toast.fire({
+             icon: 'warning',
+             titleText: message,
+             width: '50%',
+             padding: '20px'
+
+            });
+            }
+        };
+    </script>
+</body>
+</html>

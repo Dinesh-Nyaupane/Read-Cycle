@@ -1,0 +1,31 @@
+user 4:
+dineshnyaupane333@gmail.com
+dinesh@98481
+
+user 18:
+sagarbanjade7@gmail.com
+geeta@98694
+
+user 22:
+rohan123@gmail.com
+rohan123
+
+user 23:
+bhuwanbhusal123@gmail.com
+bhuwan123
+
+user 24:
+viveksharma123@gmail.com
+vivek123
+
+
+Demo Book Data:
+Title: Rich Dad Poor Dad
+Author: Robert Kiyosaki and Sharon Lechter
+ISBN: 9780446677455
+Genre: Non-fiction
+Price: 199
+Image URL: https://static-01.daraz.com.np/p/2cbf2204e91cf5fd0c9f69432fa56f08.jpg
+Synopsis: Rich Dad, Poor Dad by Robert T. Kiyosaki is a personal finance book that 
+          emphasizes the importance of financial education, teaches how to make money work for you, 
+          and challenges traditional beliefs about money.
